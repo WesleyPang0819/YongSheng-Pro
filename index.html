@@ -26,6 +26,15 @@
             to { opacity: 1; transform: scale(1); }
         }
         
+        /* 隐藏滚动条但保留滚动功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
         /* WhatsApp 发光闪动动画 (青色) */
         @keyframes navWaPulse {
             0% {
@@ -619,7 +628,7 @@
                 <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
                     <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                        <div class="text-lg font-medium tracking-tight text-white">5. 阳阳台玻璃</div>
+                        <div class="text-lg font-medium tracking-tight text-white">5. 阳台玻璃</div>
                     </div>
                 </div>
                 <!-- 6 -->
