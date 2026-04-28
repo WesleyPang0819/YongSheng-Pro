@@ -42,14 +42,14 @@
             }
         }
         
-        /* 电脑版 - 药丸形状 (精致尺寸) */
+        /* 电脑版 - 药丸形状 (放大一个尺寸) */
         .nav-wa-pulse {
             animation: navWaPulse 1.8s infinite ease-in-out;
             background-color: #25D366; 
             color: #ffffff;
             border: 2px solid #20B958; 
             border-radius: 9999px;
-            padding: 8px 20px; /* 缩小内边距 */
+            padding: 10px 24px; /* 适中偏大的内边距 */
         }
 
         /* 手机版 - 圆形悬浮按钮 (FAB) */
@@ -76,20 +76,16 @@
 </head>
 <body class="bg-white text-zinc-900 selection:bg-zinc-200 overflow-x-hidden">
 
-    <!-- Logo Container (保留对齐：被限制在 max-w-7xl 内) -->
-    <div class="absolute top-0 left-0 right-0 z-[89] pointer-events-none h-24">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative w-full h-full">
-            <div data-reveal class="absolute top-6 left-6 lg:left-12 flex items-center gap-2 md:gap-3 mix-blend-difference pointer-events-auto opacity-0 -translate-y-4 transition-all duration-1000 ease-out text-white">
-                <img src="https://s3.bmp.ovh/2026/04/20/Ydm3xxvR.jpg" alt="Logo" class="h-7 md:h-12 w-auto rounded-sm" style="mix-blend-mode: multiply; filter: contrast(1.1);">
-                <div class="text-base md:text-xl tracking-tight font-medium">YongSheng<span class="text-zinc-300">Alu Enterprise</span></div>
-            </div>
-        </div>
+    <!-- Logo Container (恢复到屏幕最左侧边缘) -->
+    <div data-reveal class="absolute top-6 left-6 lg:top-8 lg:left-8 z-[89] flex items-center gap-2 md:gap-3 mix-blend-difference opacity-0 -translate-y-4 transition-all duration-1000 ease-out text-white">
+        <img src="https://s3.bmp.ovh/2026/04/20/Ydm3xxvR.jpg" alt="Logo" class="h-7 md:h-12 w-auto rounded-sm" style="mix-blend-mode: multiply; filter: contrast(1.1);">
+        <div class="text-base md:text-xl tracking-tight font-medium">YongSheng<span class="text-zinc-300">Alu Enterprise</span></div>
     </div>
 
-    <!-- 电脑版 WA Button (固定在屏幕最边缘，调整为精致小尺寸) -->
-    <div data-reveal class="fixed top-8 right-8 lg:top-10 lg:right-10 z-[90] opacity-0 -translate-y-4 transition-all duration-1000 ease-out hidden md:block pointer-events-none">
-        <a href="javascript:void(0)" onclick="openFormModal()" class="flex items-center gap-2 text-base font-medium cursor-pointer nav-wa-pulse hover:brightness-110 transition-all duration-300 pointer-events-auto shadow-lg">
-            <iconify-icon icon="mdi:whatsapp" class="text-2xl"></iconify-icon>
+    <!-- 电脑版 WA Button (固定在屏幕最边缘，放大一个尺寸) -->
+    <div data-reveal class="fixed top-6 right-6 lg:top-8 lg:right-8 z-[90] opacity-0 -translate-y-4 transition-all duration-1000 ease-out hidden md:block pointer-events-none">
+        <a href="javascript:void(0)" onclick="openFormModal()" class="flex items-center gap-2 text-base lg:text-lg font-medium cursor-pointer nav-wa-pulse hover:brightness-110 transition-all duration-300 pointer-events-auto shadow-lg">
+            <iconify-icon icon="mdi:whatsapp" class="text-2xl lg:text-3xl"></iconify-icon>
             WhatsApp
         </a>
     </div>
@@ -103,8 +99,8 @@
 
     <section class="relative bg-zinc-950 text-white pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 lg:px-12 overflow-hidden">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
-            <!-- 左侧文字内容区：电脑版向上偏移 (lg:-translate-y-12) 以平衡视觉 -->
-            <div class="lg:col-span-6 space-y-8 lg:-translate-y-12">
+            <!-- 左侧文字内容区：电脑版向上偏移 (lg:-translate-y-20) 以平衡视觉，对齐右侧照片顶部 -->
+            <div class="lg:col-span-6 space-y-8 lg:-translate-y-20">
                 <div data-reveal data-delay="100" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 text-base shadow-lg shadow-black/20">
                         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -623,7 +619,7 @@
                 <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
                     <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                        <div class="text-lg font-medium tracking-tight text-white">5. 阳台玻璃</div>
+                        <div class="text-lg font-medium tracking-tight text-white">5. 阳阳台玻璃</div>
                     </div>
                 </div>
                 <!-- 6 -->
