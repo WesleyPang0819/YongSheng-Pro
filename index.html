@@ -2,12 +2,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>专业铝门定制与安装服务 | Aluminium Door Expert</title>
+    <title>专业铝门定制与安装服务 | Yong Sheng Alu Enterprise</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -20,20 +21,81 @@
         details > summary::-webkit-details-marker {
             display: none;
         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* WhatsApp 发光闪动动画 (青色) */
+        @keyframes navWaPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.8);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 20px 8px rgba(37, 211, 102, 0.4);
+                transform: scale(1.08);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+                transform: scale(1);
+            }
+        }
+        
+        /* 电脑版 - 药丸形状 */
+        .nav-wa-pulse {
+            animation: navWaPulse 1.8s infinite ease-in-out;
+            background-color: #25D366; 
+            color: #ffffff;
+            border: 2px solid #20B958; 
+            border-radius: 9999px;
+            padding: 6px 18px;
+        }
+
+        /* 手机版 - 圆形悬浮按钮 (FAB) */
+        .mobile-wa-pulse {
+            animation: navWaPulse 1.8s infinite ease-in-out;
+            background-color: #25D366;
+            color: #ffffff;
+            border: 2px solid #20B958;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* 弹窗底部大按钮闪动 */
+        .modal-cta-pulse {
+            animation: navWaPulse 1.8s infinite ease-in-out;
+            border: 2px solid #20B958;
+        }
     </style>
 </head>
 <body class="bg-white text-zinc-900 selection:bg-zinc-200 overflow-x-hidden">
 
-    <!-- Navigation -->
-    <nav data-reveal class="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 lg:px-12 mix-blend-difference text-white opacity-0 -translate-y-4 transition-all duration-1000 ease-out">
-        <div class="text-xl tracking-tight font-medium">YongSheng<span class="text-zinc-300">Aluminium</span></div>
-        <a href="javascript:void(0)" onclick="openFormModal()" class="hidden md:flex items-center gap-2 text-base font-medium hover:text-zinc-300 transition-colors cursor-pointer">
-            <iconify-icon icon="solar:chat-dots-linear" class="text-xl"></iconify-icon>
-            联系我们
-        </a>
-    </nav>
+    <div data-reveal class="absolute top-0 left-0 right-0 z-[90] flex items-center justify-between px-6 py-6 lg:px-12 text-white opacity-0 -translate-y-4 transition-all duration-1000 ease-out pointer-events-none">
+        <div class="flex items-center gap-2 md:gap-3 mix-blend-difference pointer-events-auto">
+            <img src="https://s3.bmp.ovh/2026/04/20/Ydm3xxvR.jpg" alt="Logo" class="h-7 md:h-12 w-auto rounded-sm" style="mix-blend-mode: multiply; filter: contrast(1.1);">
+            <div class="text-base md:text-xl tracking-tight font-medium">YongSheng<span class="text-zinc-300">Alu Enterprise</span></div>
+        </div>
+    </div>
 
-    <!-- 1. Hero Section -->
+    <div data-reveal class="fixed top-6 right-6 lg:top-6 lg:right-12 z-[90] opacity-0 -translate-y-4 transition-all duration-1000 ease-out pointer-events-none hidden md:block">
+        <a href="javascript:void(0)" onclick="openFormModal()" class="flex items-center gap-2 text-base font-medium cursor-pointer nav-wa-pulse hover:brightness-110 transition-all duration-300 pointer-events-auto">
+            <iconify-icon icon="mdi:whatsapp" class="text-2xl"></iconify-icon>
+            WhatsApp
+        </a>
+    </div>
+
+    <div data-reveal class="fixed bottom-6 right-6 z-[90] opacity-0 translate-y-4 transition-all duration-1000 ease-out pointer-events-none md:hidden">
+        <a href="javascript:void(0)" onclick="openFormModal()" class="mobile-wa-pulse cursor-pointer hover:brightness-110 transition-all duration-300 pointer-events-auto">
+            <iconify-icon icon="mdi:whatsapp" class="text-3xl"></iconify-icon>
+        </a>
+    </div>
+
     <section class="relative bg-zinc-950 text-white pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 lg:px-12 overflow-hidden">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
             <div class="lg:col-span-6 space-y-8">
@@ -46,14 +108,14 @@
                 
                 <div data-reveal data-delay="200" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
-                        专业铝门安装服务<br>
+                        柔佛专业铝门安装服务<br>
                         <span class="text-zinc-500">住家・店面・办公室皆可</span>
                     </h1>
                 </div>
                 
                 <div data-reveal data-delay="300" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
                     <p class="text-lg md:text-xl text-zinc-400 max-w-lg leading-relaxed">
-                        Aluminium Door Supply & Installation Service. 从测量、定制到专业安装，为您提供高质感、耐用的门窗解决方案。
+                        Yong Sheng Alu Enterprise - 柔佛 (Johor) 首选。从测量、定制到专业安装，为您提供高质感、耐用的门窗解决方案。
                     </p>
                 </div>
 
@@ -100,7 +162,7 @@
             <div class="lg:col-span-6 relative">
                 <div data-reveal data-delay="300" class="opacity-0 scale-95 transition-all duration-1000 ease-out">
                     <div class="aspect-[4/5] md:aspect-[3/2] lg:aspect-[4/5] overflow-hidden bg-zinc-900 relative group">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2940&auto=format&fit=crop" alt="Premium aluminium door installation" class="object-cover w-full h-full opacity-90 transition-transform duration-[2000ms] ease-out group-hover:scale-110">
+                        <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Office%20Glass.webp" alt="Premium aluminium door installation" class="object-cover w-full h-full opacity-90 transition-transform duration-[2000ms] ease-out group-hover:scale-110">
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                         <div class="absolute inset-0 border border-white/10 m-4 pointer-events-none transition-transform duration-700 group-hover:scale-[0.98]"></div>
                     </div>
@@ -109,25 +171,23 @@
         </div>
     </section>
 
-    <!-- 2. Services Section -->
     <section class="lg:py-32 lg:px-12 bg-zinc-50 pt-24 pr-6 pb-24 pl-6">
         <div class="max-w-7xl mx-auto">
             <div data-reveal class="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8 opacity-0 translate-y-8 transition-all duration-1000 ease-out">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-4">我们的服务项目</h2>
-                    <p class="text-lg text-zinc-500 max-w-xl">无论您是翻新住家、装潢新店面，还是办公室隔间，我们都能提供合适的铝门解决方案。</p>
+                    <p class="text-lg text-zinc-500 max-w-xl">Yong Sheng Alu Enterprise 提供各类铝合金门窗与玻璃相关服务，无论是住家、店面还是办公室，都能根据您的需求提供合适方案，实惠但高质量。</p>
                 </div>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-                <!-- Service Items -->
                 <div data-reveal data-delay="100" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
                     <div class="group cursor-pointer p-6 -m-6 rounded-2xl hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 hover:-translate-y-1">
                         <div class="w-12 h-12 bg-zinc-200 flex items-center justify-center mb-6 group-hover:bg-zinc-900 group-hover:text-white transition-colors duration-500 rounded-lg">
                             <iconify-icon icon="solar:home-2-linear" class="text-2xl"></iconify-icon>
                         </div>
-                        <h3 class="text-2xl font-medium tracking-tight mb-3">推拉门 / 折叠门安装</h3>
-                        <p class="text-lg text-zinc-600">节省空间的最佳选择，适合阳台、厨房分隔或商业空间，滑动顺畅，坚固耐用。</p>
+                        <h3 class="text-2xl font-medium tracking-tight mb-3">折叠门 / 推拉门</h3>
+                        <p class="text-lg text-zinc-600">主打高性价比折叠门与实用推拉门，适合厨房、阳台、空间分隔等用途，兼顾美观、顺畅与耐用性。</p>
                     </div>
                 </div>
                 
@@ -136,8 +196,8 @@
                         <div class="w-12 h-12 bg-zinc-200 flex items-center justify-center mb-6 group-hover:bg-zinc-900 group-hover:text-white transition-colors duration-500 rounded-lg">
                             <iconify-icon icon="solar:waterdrops-linear" class="text-2xl"></iconify-icon>
                         </div>
-                        <h3 class="text-2xl font-medium tracking-tight mb-3">厕所 / 浴室门</h3>
-                        <p class="text-lg text-zinc-600">防水防潮的铝制边框搭配磨砂玻璃或定制面板，易于清洁且寿命长。</p>
+                        <h3 class="text-2xl font-medium tracking-tight mb-3">厕所门 / 厨房门</h3>
+                        <p class="text-lg text-zinc-600">提供适合日常家用的厕所门与厨房门安装服务，实用耐用，易清理，也能配合不同空间风格。</p>
                     </div>
                 </div>
 
@@ -146,8 +206,8 @@
                         <div class="w-12 h-12 bg-zinc-200 flex items-center justify-center mb-6 group-hover:bg-zinc-900 group-hover:text-white transition-colors duration-500 rounded-lg">
                             <iconify-icon icon="solar:shop-linear" class="text-2xl"></iconify-icon>
                         </div>
-                        <h3 class="text-2xl font-medium tracking-tight mb-3">店面 / 办公室门</h3>
-                        <p class="text-lg text-zinc-600">提供专业、透视感强的商业级铝门，提升企业形象，配备安全门锁系统。</p>
+                        <h3 class="text-2xl font-medium tracking-tight mb-3">店面门 / 卷门</h3>
+                        <p class="text-lg text-zinc-600">适用于店面、办公室及商业空间，兼顾门面形象、使用便利与基本安全需求。</p>
                     </div>
                 </div>
 
@@ -156,8 +216,8 @@
                         <div class="w-12 h-12 bg-zinc-200 flex items-center justify-center mb-6 group-hover:bg-zinc-900 group-hover:text-white transition-colors duration-500 rounded-lg">
                             <iconify-icon icon="solar:refresh-linear" class="text-2xl"></iconify-icon>
                         </div>
-                        <h3 class="text-2xl font-medium tracking-tight mb-3">更换旧门服务</h3>
-                        <p class="text-lg text-zinc-600">专业拆除旧门框并清理现场，无缝安装全新铝门，不破坏现有墙面结构。</p>
+                        <h3 class="text-2xl font-medium tracking-tight mb-3">吊轨门 / 幽灵门</h3>
+                        <p class="text-lg text-zinc-600">提供更现代感的门型选择，适合追求简洁设计与空间质感的客户，外观更俐落，使用更顺手。</p>
                     </div>
                 </div>
 
@@ -166,8 +226,8 @@
                         <div class="w-12 h-12 bg-zinc-200 flex items-center justify-center mb-6 group-hover:bg-zinc-900 group-hover:text-white transition-colors duration-500 rounded-lg">
                             <iconify-icon icon="solar:pen-new-square-linear" class="text-2xl"></iconify-icon>
                         </div>
-                        <h3 class="text-2xl font-medium tracking-tight mb-3">上门测量与建议</h3>
-                        <p class="text-lg text-zinc-600">师傅亲自上门评估现场环境，提供精准尺寸测量，并根据您的预算给出合理建议。</p>
+                        <h3 class="text-2xl font-medium tracking-tight mb-3">免费上门测量与估价</h3>
+                        <p class="text-lg text-zinc-600">提供免费上门测量与估价服务，根据现场环境与预算给出建议，帮助客户少走弯路、不易踩雷。</p>
                     </div>
                 </div>
 
@@ -176,15 +236,14 @@
                         <div class="w-12 h-12 bg-zinc-200 flex items-center justify-center mb-6 group-hover:bg-zinc-900 group-hover:text-white transition-colors duration-500 rounded-lg">
                             <iconify-icon icon="solar:palette-linear" class="text-2xl"></iconify-icon>
                         </div>
-                        <h3 class="text-2xl font-medium tracking-tight mb-3">多种款式定制</h3>
-                        <p class="text-lg text-zinc-600">提供多种铝框颜色（黑、白、灰等）及玻璃材质（清玻璃、磨砂、压花）供您选择搭配。</p>
+                        <h3 class="text-2xl font-medium tracking-tight mb-3">铝合金与玻璃相关装修服务</h3>
+                        <p class="text-lg text-zinc-600">除了门类安装，也可承接铝合金门窗、玻璃、凉棚、铁花、地砖等相关装修项目，一次处理更方便。</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. Why Choose Us Section -->
     <section class="py-24 lg:py-32 px-6 lg:px-12">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
             <div class="lg:w-1/3">
@@ -242,84 +301,100 @@
         </div>
     </section>
 
-    <!-- 4. Project Portfolio Section -->
     <section id="portfolio" class="py-24 lg:py-32 bg-zinc-950 text-white px-6 lg:px-12">
         <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
             <div data-reveal class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 opacity-0 translate-y-8 transition-all duration-1000 ease-out">
-                <div>
+                <div class="max-w-3xl">
                     <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-4">近期安装案例</h2>
-                    <p class="text-lg text-zinc-400">实地拍摄的施工完成图，展现我们的真实工艺水准。</p>
+                    <p class="text-lg text-zinc-400 leading-relaxed">精选真实施工案例，先带您查看我们主打的热门门类项目，再往下浏览完整的门窗与玻璃案例总览。</p>
                 </div>
-                <div class="text-zinc-500 font-medium tracking-wide text-base">PROJECT GALLERY</div>
+                <div class="text-zinc-500 font-medium tracking-wide text-base shrink-0">PROJECT GALLERY</div>
             </div>
 
-            <!-- Masonry-style Grid -->
+            <!-- Group 1: 主打门类案例 (6 Items) -->
+            <div data-reveal class="mb-8 opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+                <h3 class="text-2xl font-medium tracking-tight border-b border-zinc-800 pb-4 text-zinc-200">主打门类案例</h3>
+            </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-                <!-- Project 1 -->
+                <!-- Item 1 -->
                 <div data-reveal data-delay="100" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
-                    <div class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg">
-                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" alt="Living room sliding door" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
+                    <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Folding%20Door.webp')" class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                        <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Folding%20Door.webp" loading="lazy" alt="折叠门" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0">
-                            <div class="text-2xl font-medium tracking-tight mb-1">客厅黑框推拉门</div>
-                            <div class="text-base text-zinc-400">住家项目 • 扩大空间感</div>
+                            <div class="text-2xl font-medium tracking-tight mb-1">折叠门</div>
+                            <div class="text-base text-zinc-400">点击查看大图</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Project 2 (Taller) -->
-                <div data-reveal data-delay="200" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out md:row-span-2">
-                    <div class="group relative aspect-square md:aspect-auto h-full overflow-hidden bg-zinc-900 rounded-lg">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop" alt="Office partition doors" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
+                <!-- Item 2 -->
+                <div data-reveal data-delay="200" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+                    <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/sliding%20door.webp')" class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                        <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/sliding%20door.webp" loading="lazy" alt="推拉门" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0">
-                            <div class="text-2xl font-medium tracking-tight mb-1">办公室玻璃隔间门</div>
-                            <div class="text-base text-zinc-400">商业项目 • 采光最大化</div>
+                            <div class="text-2xl font-medium tracking-tight mb-1">推拉门</div>
+                            <div class="text-base text-zinc-400">点击查看大图</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 3 -->
+                <!-- Item 3 -->
                 <div data-reveal data-delay="300" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
-                    <div class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg">
-                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg" alt="Bathroom folding door" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
+                    <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Slim%20Frame,Hanging%20door.JPG')" class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                        <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Slim%20Frame,Hanging%20door.JPG" loading="lazy" alt="极简窄边框 / 吊轨门" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0">
-                            <div class="text-2xl font-medium tracking-tight mb-1">浴室铝框折叠门</div>
-                            <div class="text-base text-zinc-400">住家项目 • 节省空间</div>
+                            <div class="text-2xl font-medium tracking-tight mb-1">极简窄边框 / 吊轨门</div>
+                            <div class="text-base text-zinc-400">点击查看大图</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 4 -->
+                <!-- Item 4 -->
                 <div data-reveal data-delay="100" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
-                    <div class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg">
-                        <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2000&auto=format&fit=crop" alt="Kitchen swing door" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
+                    <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/aluminium%20slim%20door%20(1).webp')" class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                        <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/aluminium%20slim%20door%20(1).webp" loading="lazy" alt="铝合金平开门" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0">
-                            <div class="text-2xl font-medium tracking-tight mb-1">厨房防油烟平开门</div>
-                            <div class="text-base text-zinc-400">住家项目 • 密封性高</div>
+                            <div class="text-2xl font-medium tracking-tight mb-1">铝合金平开门</div>
+                            <div class="text-base text-zinc-400">点击查看大图</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 5 -->
-                <div data-reveal data-delay="300" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
-                    <div class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg">
-                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c543a9e1-f226-4ced-80b0-feb8445a75b9_1600w.jpg" alt="Shopfront door" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
+                <!-- Item 5 -->
+                <div data-reveal data-delay="200" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+                    <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp')" class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                        <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp" loading="lazy" alt="阳台玻璃" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0">
-                            <div class="text-2xl font-medium tracking-tight mb-1">咖啡厅店面大门</div>
-                            <div class="text-base text-zinc-400">店面项目 • 高级灰边框</div>
+                            <div class="text-2xl font-medium tracking-tight mb-1">阳台玻璃</div>
+                            <div class="text-base text-zinc-400">点击查看大图</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div data-reveal data-delay="300" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+                    <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Kitchen%20cabinet.webp')" class="group relative aspect-square overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                        <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Kitchen%20cabinet.webp" loading="lazy" alt="厨房门" class="object-cover w-full h-full opacity-80 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[1500ms] ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0">
+                            <div class="text-2xl font-medium tracking-tight mb-1">厨房门</div>
+                            <div class="text-base text-zinc-400">点击查看大图</div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
+            <!-- 查看更多按钮 (替换了原本的Group 2) -->
             <div data-reveal class="mt-16 text-center opacity-0 translate-y-8 transition-all duration-1000 ease-out">
-                <button onclick="openFormModal()" class="group relative overflow-hidden inline-flex items-center gap-2 border border-zinc-700 text-white hover:border-white px-8 py-4 text-lg font-medium transition-all duration-300 hover:bg-white hover:text-zinc-950 active:scale-[0.98] cursor-pointer">
-                    喜欢这些效果？立即联系我们
+                <button onclick="openPortfolioModal()" class="group relative overflow-hidden inline-flex items-center gap-2 border border-zinc-700 text-white hover:border-white px-8 py-4 text-lg font-medium transition-all duration-300 hover:bg-white hover:text-zinc-950 active:scale-[0.98] cursor-pointer">
+                    查看更多完整案例
+                    <iconify-icon icon="solar:arrow-right-linear" class="text-xl transform group-hover:translate-x-1 transition-transform duration-300"></iconify-icon>
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- 5. Process Section -->
     <section class="py-24 lg:py-32 px-6 lg:px-12">
         <div data-reveal class="max-w-4xl mx-auto text-center mb-16 opacity-0 translate-y-8 transition-all duration-1000 ease-out">
             <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-6">服务流程，简单四步</h2>
@@ -327,12 +402,10 @@
         </div>
 
         <div class="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 relative">
-            <!-- Connecting Line (Desktop) -->
             <div class="hidden lg:block absolute top-12 left-1/8 right-1/8 h-[1px] bg-zinc-100 -z-10">
                 <div class="h-full bg-zinc-900 w-0 transition-all duration-[2000ms] ease-out" id="process-line"></div>
             </div>
 
-            <!-- Steps -->
             <div data-reveal data-delay="100" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
                 <div class="relative flex flex-col items-center text-center group">
                     <div class="w-24 h-24 bg-white border border-zinc-200 rounded-full flex items-center justify-center mb-6 group-hover:border-zinc-900 group-hover:shadow-xl transition-all duration-500 relative z-10 group-hover:-translate-y-2">
@@ -379,7 +452,6 @@
         </div>
     </section>
 
-    <!-- 6. FAQ Section -->
     <section class="py-24 lg:py-32 bg-zinc-50 px-6 lg:px-12">
         <div class="max-w-3xl mx-auto">
             <div data-reveal class="text-center mb-16 opacity-0 translate-y-8 transition-all duration-1000 ease-out">
@@ -388,7 +460,6 @@
             </div>
 
             <div class="space-y-4">
-                <!-- FAQ Items -->
                 <div data-reveal data-delay="100" class="opacity-0 translate-y-8 transition-all duration-1000 ease-out">
                     <details class="group bg-white border border-zinc-200 p-6 rounded-lg transition-all duration-300 hover:shadow-md [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex justify-between items-center font-medium cursor-pointer text-xl tracking-tight list-none">
@@ -412,7 +483,7 @@
                             </span>
                         </summary>
                         <div class="text-lg text-zinc-600 mt-4 leading-relaxed">
-                            我们提供免费的上门测量服务（限服务区域内）。在您觉得初步报价合理，并有意愿进行下一步时，我们会安排专业师傅上门精确测量。
+                            我们提供免费的上门测量服务（限柔佛 Johor 地区）。在您觉得初步报价合理，并有意愿进行下一步时，我们会安排专业师傅上门精确测量。
                         </div>
                     </details>
                 </div>
@@ -448,9 +519,7 @@
         </div>
     </section>
 
-    <!-- 7. Final CTA Section -->
     <section id="contact" class="py-32 px-6 lg:px-12 bg-zinc-950 text-white text-center relative overflow-hidden">
-        <!-- Background aesthetic lines -->
         <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 50% 0%, #ffffff 1px, transparent 1px); background-size: 40px 40px;"></div>
         
         <div class="max-w-3xl mx-auto space-y-8 relative z-10">
@@ -483,23 +552,139 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-zinc-950 text-zinc-500 border-t border-zinc-900 py-12 px-6 lg:px-12 text-center text-base">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>© 2024 YongSheng Aluminium. All rights reserved.</div>
-            <div class="flex gap-6">
-                <span class="hover:text-zinc-300 transition-colors cursor-pointer">专业铝门定制</span>
-                <span class="hover:text-zinc-300 transition-colors cursor-pointer">上门安装服务</span>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col md:flex-row items-center gap-4">
+                <div>© 2026 Yong Sheng Alu Enterprise. All rights reserved.</div>
+                <div class="hidden md:block text-zinc-700">|</div>
+                <div>负责人: Jokey Heng</div>
+            </div>
+            <div class="flex items-center justify-center gap-6 text-2xl">
+                <!-- 只保留 Instagram 链接 -->
+                <a href="https://www.instagram.com/ys_aluminium_/" target="_blank" class="hover:text-zinc-300 transition-colors"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
             </div>
         </div>
     </footer>
 
-    <!-- Contact Form Modal -->
-    <div id="contact-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center px-4">
+    <!-- Portfolio Full View Modal (New) -->
+    <div id="portfolio-modal" class="fixed inset-0 z-[100] hidden flex-col">
         <!-- Backdrop -->
+        <div class="absolute inset-0 bg-zinc-950/95 backdrop-blur-md transition-opacity" onclick="closePortfolioModal()"></div>
+        
+        <!-- Close Button -->
+        <button onclick="closePortfolioModal()" class="absolute top-6 right-6 md:top-8 md:right-8 text-zinc-400 hover:text-white transition-colors z-[105] bg-zinc-900/50 p-2 rounded-full backdrop-blur-sm cursor-pointer">
+            <iconify-icon icon="solar:close-circle-linear" class="text-4xl"></iconify-icon>
+        </button>
+
+        <!-- Scrollable Content -->
+        <div class="relative w-full max-w-7xl mx-auto h-full overflow-y-auto px-4 py-16 md:p-12 z-10 no-scrollbar">
+            <div class="mb-12 text-center">
+                <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-white mb-4">完整门窗与玻璃案例总览</h3>
+                <p class="text-zinc-400 text-lg">浏览我们涵盖各类材质与设计的完整安装记录，寻找属于您的空间灵感。</p>
+            </div>
+
+            <!-- 12 Items Grid (修改为: 一排3个，居中，照片比例宽320x高400即4:5) -->
+            <div class="grid grid-cols-2 md:grid-cols-3 max-w-5xl mx-auto gap-4 lg:gap-6">
+                <!-- 1 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Folding%20Door.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Folding%20Door.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">1. 折叠门</div>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/sliding%20door.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/sliding%20door.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">2. 推拉门</div>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Slim%20Frame,Hanging%20door.JPG')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Slim%20Frame,Hanging%20door.JPG" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">3. 极简窄边框 / 吊轨门</div>
+                    </div>
+                </div>
+                <!-- 4 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/aluminium%20slim%20door%20(1).webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/aluminium%20slim%20door%20(1).webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">4. 铝合金平开门</div>
+                    </div>
+                </div>
+                <!-- 5 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">5. 阳台玻璃</div>
+                    </div>
+                </div>
+                <!-- 6 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Kitchen%20cabinet.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Kitchen%20cabinet.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">6. 厨房门</div>
+                    </div>
+                </div>
+                <!-- 7 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Multi-Point%20Open-Window.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Multi-Point%20Open-Window.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">7. 多点开启窗</div>
+                    </div>
+                </div>
+                <!-- 8 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Sliding%20Window.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Sliding%20Window.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">8. 推拉窗</div>
+                    </div>
+                </div>
+                <!-- 9 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Fixed%20Window.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Fixed%20Window.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">9. 固定窗</div>
+                    </div>
+                </div>
+                <!-- 10 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Balcony%20Glass%20%20Staircase%20Glass.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">10. 阳台玻璃/楼梯玻璃</div>
+                    </div>
+                </div>
+                <!-- 11 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Office%20Glass.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/_Office%20Glass.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">11. 办公室玻璃隔间</div>
+                    </div>
+                </div>
+                <!-- 12 -->
+                <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Shower%20Glass.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
+                    <img src="https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Shower%20Glass.webp" loading="lazy" class="object-cover w-full h-full opacity-70 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <div class="text-lg font-medium tracking-tight text-white">12. 淋浴玻璃隔断</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA within Portfolio -->
+            <div class="mt-16 text-center pb-12 px-4">
+                <button onclick="openFormModal()" class="modal-cta-pulse group relative overflow-hidden inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3.5 md:px-10 md:py-5 text-base md:text-xl font-medium transition-colors duration-300 hover:bg-[#20B958] rounded-full cursor-pointer max-w-full">
+                    <iconify-icon icon="mdi:whatsapp" class="text-2xl md:text-3xl"></iconify-icon>
+                    <span class="whitespace-nowrap">有兴趣？欢迎 WhatsApp 联系</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Modal (Updated z-index to 110) -->
+    <div id="contact-modal" class="fixed inset-0 z-[110] hidden flex-col items-center justify-center px-4">
         <div class="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm transition-opacity" onclick="closeFormModal()"></div>
         
-        <!-- Modal Content -->
         <div class="relative bg-white w-full max-w-lg mx-auto rounded-2xl shadow-2xl overflow-hidden animate-[fadeIn_0.3s_ease-out] z-10">
             <div class="flex justify-between items-center p-6 border-b border-zinc-100">
                 <h3 class="text-2xl font-semibold tracking-tight text-zinc-900">获取免费估价</h3>
@@ -525,7 +710,7 @@
                 </div>
                 
                 <div class="pt-4">
-                    <button type="submit" class="w-full bg-zinc-950 text-white font-medium text-lg py-4 rounded-lg hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2">
+                    <button id="submit-btn" type="submit" class="w-full bg-zinc-950 text-white font-medium text-lg py-4 rounded-lg hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2">
                         <iconify-icon icon="logos:whatsapp-icon" class="text-xl grayscale brightness-200"></iconify-icon>
                         发送详情至 WhatsApp
                     </button>
@@ -534,82 +719,138 @@
         </div>
     </div>
 
-    <!-- Animations Script -->
-    <script>
-        // Modal Logic
-        const modal = document.getElementById('contact-modal');
+    <!-- Image Detail Modal (Updated z-index to 120) -->
+    <div id="image-modal" class="fixed inset-0 z-[120] hidden flex-col items-center justify-center px-4 py-8">
+        <div class="absolute inset-0 bg-zinc-950/95 backdrop-blur-sm transition-opacity" onclick="closeImageModal()"></div>
         
+        <button onclick="closeImageModal()" class="absolute top-6 right-6 md:top-8 md:right-8 text-zinc-400 hover:text-white transition-colors z-20">
+            <iconify-icon icon="solar:close-circle-linear" class="text-4xl"></iconify-icon>
+        </button>
+
+        <div class="relative w-full max-w-5xl h-full flex items-center justify-center animate-[fadeIn_0.3s_ease-out] z-10 pointer-events-none">
+            <img id="modal-image" src="" alt="Project Detail" class="object-contain max-w-full max-h-full rounded-lg shadow-2xl pointer-events-auto">
+        </div>
+    </div>
+
+    <script>
+        // ======= Supabase 初始化配置 =======
+        // 注意：请务必替换为您真实的 URL 和 API Key
+        const SUPABASE_URL = 'https://rptvskcwqtdqovesbarv.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_MYS0LZWNmFQurMyM6Y4_Qw_4irG8mKq';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // ===================================
+
+        // Portfolio Modal Logic
+        const portfolioModal = document.getElementById('portfolio-modal');
+        function openPortfolioModal() {
+            portfolioModal.classList.remove('hidden');
+            portfolioModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        function closePortfolioModal() {
+            portfolioModal.classList.add('hidden');
+            portfolioModal.classList.remove('flex');
+            checkAndRestoreScroll();
+        }
+
+        // Form Modal Logic
+        const modal = document.getElementById('contact-modal');
         function openFormModal() {
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden'; 
         }
-
         function closeFormModal() {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
-            document.body.style.overflow = ''; // Restore scrolling
+            checkAndRestoreScroll();
+        }
+
+        // Image Modal Logic
+        const imageModal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        function openImageModal(imgSrc) {
+            modalImage.src = imgSrc;
+            imageModal.classList.remove('hidden');
+            imageModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeImageModal() {
+            imageModal.classList.add('hidden');
+            imageModal.classList.remove('flex');
+            checkAndRestoreScroll();
+        }
+
+        // Helper to restore scrolling only if ALL modals are closed
+        function checkAndRestoreScroll() {
+            if (modal.classList.contains('hidden') && 
+                imageModal.classList.contains('hidden') && 
+                portfolioModal.classList.contains('hidden')) {
+                document.body.style.overflow = '';
+            }
         }
 
         // WhatsApp Form Submit Logic
         document.getElementById('wa-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const submitBtn = document.getElementById('submit-btn');
+            
+            // 防止重复连点
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+
             const name = document.getElementById('form-name').value;
             const phone = document.getElementById('form-phone').value;
             const req = document.getElementById('form-req').value;
 
-            // 整理要发送到 WhatsApp 的文本格式（更自然、像人手打的格式）
-            let message = `Hi，我通过网站看到你们的铝门安装服务，想了解更多。\n\n`;
-            message += `我是 ${name}，联络号码是 ${phone}。\n\n`;
-            message += `我的需求是：\n${req}`;
+            // 1. 后台静默发送数据到 Supabase (不再使用 await 阻塞等待，解决手机拦截问题)
+            supabaseClient
+                .from('leads')
+                .insert([{ name, phone, requirement: req }])
+                .then(() => console.log('Lead saved'))
+                .catch((err) => console.error('Supabase Error:', err));
 
-            // URL 编码文本以便在浏览器链接中使用
+            // 2. 准备 WhatsApp 链接
+            let message = `Hi，我通过网站看到你们的铝门安装服务，想了解更多。\n\n我是 ${name}，联络号码是 ${phone}。\n\n我的需求是：\n${req}`;
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/601111960310?text=${encodedMessage}`;
 
-            // 在新标签页打开 WhatsApp
-            window.open(whatsappUrl, '_blank');
-            
-            // 关闭表单并清空内容
+            // 3. 恢复表单与关闭弹窗
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
             closeFormModal();
             this.reset();
+            
+            // 4. 【终极修复】瞬间同步点击，强制呼出 WhatsApp
+            const link = document.createElement('a');
+            link.href = whatsappUrl;
+            link.target = '_blank'; // 新标签页打开
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         });
 
         document.addEventListener("DOMContentLoaded", () => {
-            // Intersection Observer for scroll reveals
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            };
-
+            const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         const target = entry.target;
                         const delay = target.getAttribute('data-delay') || '0';
-                        
                         setTimeout(() => {
                             target.classList.remove('opacity-0', 'translate-y-8', 'scale-95', '-translate-y-4');
-                            // Specifically for the nav
                             target.classList.add('opacity-100', 'translate-y-0', 'scale-100');
-                            
-                            // Trigger Process Line animation when the section is visible
                             if(target.querySelector('#process-line')) {
-                                setTimeout(() => {
-                                    target.querySelector('#process-line').style.width = '100%';
-                                }, 500);
+                                setTimeout(() => { target.querySelector('#process-line').style.width = '100%'; }, 500);
                             }
                         }, parseInt(delay));
-                        
                         observer.unobserve(target);
                     }
                 });
             }, observerOptions);
 
-            document.querySelectorAll('[data-reveal]').forEach((el) => {
-                observer.observe(el);
-            });
+            document.querySelectorAll('[data-reveal]').forEach((el) => { observer.observe(el); });
         });
     </script>
 
