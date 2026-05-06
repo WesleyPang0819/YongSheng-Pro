@@ -1,17 +1,26 @@
+<!DOCTYPE html>
 <html lang="zh-CN" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="favicon.ico/favicon-32x32.png" type="image/png">
-  <!-- 其他 head 内容 -->
-</head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>专业铝门定制与安装服务 | Yong Sheng Alu Enterprise</title>
+    
+    <link rel="icon" href="favicon.ico/favicon-32x32.png" type="image/png">
+    
+    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 引入 Iconify -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- 引入 Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -566,7 +575,7 @@
         </div>
     </section>
 
-    <!-- Footer (修改居中排版并将 IG 放在 Jokey Heng 旁边) -->
+    <!-- Footer -->
     <footer class="bg-zinc-950 text-zinc-500 border-t border-zinc-900 py-12 px-6 lg:px-12 text-base">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-center items-center gap-4">
             <div>© 2026 Yong Sheng Alu Enterprise. All rights reserved.</div>
@@ -580,7 +589,7 @@
         </div>
     </footer>
 
-    <!-- Portfolio Full View Modal (New) -->
+    <!-- Portfolio Full View Modal -->
     <div id="portfolio-modal" class="fixed inset-0 z-[100] hidden flex-col">
         <!-- Backdrop -->
         <div class="absolute inset-0 bg-zinc-950/95 backdrop-blur-md transition-opacity" onclick="closePortfolioModal()"></div>
@@ -597,7 +606,7 @@
                 <p class="text-zinc-400 text-lg">浏览我们涵盖各类材质与设计的完整安装记录，寻找属于您的空间灵感。</p>
             </div>
 
-            <!-- 12 Items Grid (修改为: 一排3个，居中，照片比例宽320x高400即4:5) -->
+            <!-- 12 Items Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 max-w-5xl mx-auto gap-4 lg:gap-6">
                 <!-- 1 -->
                 <div onclick="openImageModal('https://rptvskcwqtdqovesbarv.supabase.co/storage/v1/object/public/Aluminium%20door%20image/Folding%20Door.webp')" class="group relative aspect-[4/5] overflow-hidden bg-zinc-900 rounded-lg cursor-pointer">
@@ -695,7 +704,7 @@
         </div>
     </div>
 
-    <!-- Contact Form Modal (Updated z-index to 110) -->
+    <!-- Contact Form Modal -->
     <div id="contact-modal" class="fixed inset-0 z-[110] hidden flex-col items-center justify-center px-4">
         <div class="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm transition-opacity" onclick="closeFormModal()"></div>
         
@@ -715,7 +724,39 @@
                 
                 <div>
                     <label for="form-phone" class="block text-sm font-medium text-zinc-700 mb-1">手机号码 *</label>
-                    <input type="tel" id="form-phone" required class="w-full px-4 py-3 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all text-zinc-900 placeholder:text-zinc-400" placeholder="例如: 0123456789">
+                    <div class="flex gap-2">
+                        <div class="w-1/3 sm:w-1/4">
+                            <input type="text" id="form-country-code" list="country-codes" value="+60" required class="w-full px-2 py-3 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all text-zinc-900 text-center bg-white" placeholder="+区号">
+                            <datalist id="country-codes">
+                                <option value="+60">马来西亚</option>
+                                <option value="+65">新加坡</option>
+                            </datalist>
+                        </div>
+                        <input type="tel" id="form-phone" required class="w-2/3 sm:w-3/4 px-4 py-3 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all text-zinc-900 placeholder:text-zinc-400" placeholder="例如: 123456789">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="form-type" class="block text-sm font-medium text-zinc-700 mb-1">门窗/玻璃款式 (可选)</label>
+                    <div class="relative">
+                        <select id="form-type" class="w-full px-4 py-3 appearance-none rounded-lg border border-zinc-300 focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all text-zinc-900 bg-white cursor-pointer">
+                            <option value="">-- 我想要的款式 --</option>
+                            <option value="折叠门">1. 折叠门</option>
+                            <option value="推拉门">2. 推拉门</option>
+                            <option value="极简窄边框 / 吊轨门">3. 极简窄边框 / 吊轨门</option>
+                            <option value="铝合金平开门">4. 铝合金平开门</option>
+                            <option value="阳台玻璃 / 楼梯玻璃">5. 阳台玻璃 / 楼梯玻璃</option>
+                            <option value="厨房门">6. 厨房门</option>
+                            <option value="多点开启窗">7. 多点开启窗</option>
+                            <option value="推拉窗">8. 推拉窗</option>
+                            <option value="固定窗">9. 固定窗</option>
+                            <option value="办公室玻璃隔间">10. 办公室玻璃隔间</option>
+                            <option value="淋浴玻璃隔断">11. 淋浴玻璃隔断</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-zinc-500">
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="text-xl"></iconify-icon>
+                        </div>
+                    </div>
                 </div>
                 
                 <div>
@@ -733,7 +774,7 @@
         </div>
     </div>
 
-    <!-- Image Detail Modal (Updated z-index to 120) -->
+    <!-- Image Detail Modal -->
     <div id="image-modal" class="fixed inset-0 z-[120] hidden flex-col items-center justify-center px-4 py-8">
         <div class="absolute inset-0 bg-zinc-950/95 backdrop-blur-sm transition-opacity" onclick="closeImageModal()"></div>
         
@@ -804,6 +845,27 @@
             }
         }
 
+        // 监听下拉菜单选择，自动填入需求输入框
+        document.getElementById('form-type').addEventListener('change', function(e) {
+            const selectedType = e.target.value;
+            const reqTextarea = document.getElementById('form-req');
+            
+            if (selectedType) {
+                if (reqTextarea.value.trim() === '') {
+                    reqTextarea.value = `我需要的款式是：${selectedType}\n`;
+                } else if (reqTextarea.value.includes('我需要的款式是：')) {
+                    // 如果已经有款式了，但是客户换了选项，就自动替换掉旧的
+                    reqTextarea.value = reqTextarea.value.replace(/我需要的款式是：.*/, `我需要的款式是：${selectedType}`);
+                } else if (reqTextarea.value.includes('需要的款式：')) {
+                    // 兼容替换掉刚才旧版本的文字
+                    reqTextarea.value = reqTextarea.value.replace(/需要的款式：.*/, `我需要的款式是：${selectedType}`);
+                } else {
+                    // 如果客户自己打了一些字，就把款式加在最前面
+                    reqTextarea.value = `我需要的款式是：${selectedType}\n` + reqTextarea.value;
+                }
+            }
+        });
+
         // WhatsApp Form Submit Logic
         document.getElementById('wa-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -815,18 +877,20 @@
             submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
 
             const name = document.getElementById('form-name').value;
-            const phone = document.getElementById('form-phone').value;
+            const countryCode = document.getElementById('form-country-code').value;
+            const phoneNum = document.getElementById('form-phone').value;
+            const phone = `${countryCode} ${phoneNum}`;
             const req = document.getElementById('form-req').value;
 
-            // 1. 后台静默发送数据到 Supabase (不再使用 await 阻塞等待，解决手机拦截问题)
+            // 1. 后台静默发送数据到 Supabase
             supabaseClient
                 .from('leads')
                 .insert([{ name, phone, requirement: req }])
                 .then(() => console.log('Lead saved'))
                 .catch((err) => console.error('Supabase Error:', err));
 
-            // 2. 准备 WhatsApp 链接
-            let message = `Hi，我通过网站看到你们的铝门安装服务，想了解更多。\n\n我是 ${name}，联络号码是 ${phone}。\n\n我的需求是：\n${req}`;
+            // 2. 准备 WhatsApp 链接 (已移除 "我的需求是：")
+            let message = `Hi，我通过网站看到你们的铝门安装服务，想了解更多。\n\n我是 ${name}，联络号码是 ${phone}。\n\n${req}`;
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/601111960310?text=${encodedMessage}`;
 
@@ -845,6 +909,7 @@
             document.body.removeChild(link);
         });
 
+        // 视差滚动与渐显动画
         document.addEventListener("DOMContentLoaded", () => {
             const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
             const observer = new IntersectionObserver((entries) => {
@@ -867,6 +932,5 @@
             document.querySelectorAll('[data-reveal]').forEach((el) => { observer.observe(el); });
         });
     </script>
-
 </body>
 </html>
