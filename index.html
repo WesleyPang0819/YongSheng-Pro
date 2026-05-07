@@ -100,7 +100,7 @@
     <!-- Logo Container (恢复到屏幕最左侧边缘) -->
     <div data-reveal class="absolute top-6 left-6 lg:top-8 lg:left-8 z-[89] flex items-center gap-2 md:gap-3 mix-blend-difference opacity-0 -translate-y-4 transition-all duration-1000 ease-out text-white">
         <img src="https://s3.bmp.ovh/2026/04/20/Ydm3xxvR.jpg" alt="Logo" class="h-7 md:h-12 w-auto rounded-sm" style="mix-blend-mode: multiply; filter: contrast(1.1);">
-        <div class="text-base md:text-xl tracking-tight font-medium">YongSheng<span class="text-zinc-300">Alu Enterprise</span></div>
+        <div class="text-base md:text-xl tracking-tight font-medium">YongSheng <span class="text-zinc-300">Alu Enterprise</span></div>
     </div>
 
     <!-- 电脑版 WA Button (固定在屏幕最边缘，放大一个尺寸) -->
@@ -758,10 +758,15 @@
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <label for="form-address" class="block text-sm font-medium text-zinc-700 mb-1">安装地址 / 地区 *</label>
+                    <input type="text" id="form-address" required class="w-full px-4 py-3 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all text-zinc-900 placeholder:text-zinc-400" placeholder="例如: Skudai / Taman Mount Austin">
+                </div>
                 
                 <div>
-                    <label for="form-req" class="block text-sm font-medium text-zinc-700 mb-1">对门的需求 (款式 / 尺寸 / 地区) *</label>
-                    <textarea id="form-req" required rows="4" class="w-full px-4 py-3 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all text-zinc-900 placeholder:text-zinc-400 resize-none" placeholder="例如: 我想在家里的厨房安装一扇黑框折叠门，尺寸大约是宽3尺x高7尺，地点在Skudai..."></textarea>
+                    <label for="form-req" class="block text-sm font-medium text-zinc-700 mb-1">对门的需求 (款式 / 尺寸等细节) *</label>
+                    <textarea id="form-req" required rows="4" class="w-full px-4 py-3 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all text-zinc-900 placeholder:text-zinc-400 resize-none" placeholder="例如: 我想在家里的厨房安装一扇黑框折叠门，尺寸大约是宽3尺x高7尺..."></textarea>
                 </div>
                 
                 <div class="pt-4">
@@ -880,17 +885,18 @@
             const countryCode = document.getElementById('form-country-code').value;
             const phoneNum = document.getElementById('form-phone').value;
             const phone = `${countryCode} ${phoneNum}`;
+            const address = document.getElementById('form-address').value;
             const req = document.getElementById('form-req').value;
 
-            // 1. 后台静默发送数据到 Supabase
+            // 1. 后台静默发送数据到 Supabase (将地址和需求合并保存)
             supabaseClient
                 .from('leads')
-                .insert([{ name, phone, requirement: req }])
+                .insert([{ name, phone, requirement: `【地址】${address}\n【需求】${req}` }])
                 .then(() => console.log('Lead saved'))
                 .catch((err) => console.error('Supabase Error:', err));
 
-            // 2. 准备 WhatsApp 链接 (已移除 "我的需求是：")
-            let message = `Hi，我通过网站看到你们的铝门安装服务，想了解更多。\n\n我是 ${name}，联络号码是 ${phone}。\n\n${req}`;
+            // 2. 准备 WhatsApp 链接
+            let message = `Hi，我通过网站看到你们的铝门安装服务，想了解更多。\n\n我是 ${name}，联络号码是 ${phone}。\n安装地址：${address}\n\n${req}`;
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/601111960310?text=${encodedMessage}`;
 
